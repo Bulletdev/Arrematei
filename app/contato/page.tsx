@@ -3,174 +3,172 @@
 import type React from "react"
 
 import { useState } from "react"
+import Navbar from "@/components/navbar"
+import Footer from "@/components/footer"
+import { Mail, Phone, MapPin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { useToast } from "@/components/ui/use-toast"
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
-export default function Contato() {
-  const [formData, setFormData] = useState({
+export default function ContatoPage() {
+  const [formState, setFormState] = useState({
     nome: "",
     email: "",
-    empresa: "",
     assunto: "",
     mensagem: "",
   })
+
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [showConfirmation, setShowConfirmation] = useState(false)
-  const { toast } = useToast()
+  const [submitSuccess, setSubmitSuccess] = useState(false)
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
+    setFormState((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSelectChange = (value: string) => {
+    setFormState((prev) => ({ ...prev, assunto: value }))
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
 
-    try {
-      const response = await fetch("/api/contato", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+    // Simulando envio do formulário
+    setTimeout(() => {
+      setIsSubmitting(false)
+      setSubmitSuccess(true)
+      setFormState({
+        nome: "",
+        email: "",
+        assunto: "",
+        mensagem: "",
       })
 
-      if (response.ok) {
-        setFormData({ nome: "", email: "", empresa: "", assunto: "", mensagem: "" })
-        setShowConfirmation(true)
-      } else {
-        throw new Error("Falha ao enviar mensagem")
-      }
-    } catch (error) {
-      toast({
-        title: "Erro",
-        description: "Houve um problema ao enviar sua mensagem. Por favor, tente novamente.",
-        variant: "destructive",
-      })
-    } finally {
-      setIsSubmitting(false)
-    }
+      // Reset success message after 5 seconds
+      setTimeout(() => {
+        setSubmitSuccess(false)
+      }, 5000)
+    }, 1500)
   }
 
   return (
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white py-12">
+    <main className="min-h-screen flex flex-col">
+      <Navbar />
+
+      <div className="bg-gradient-to-b from-emerald-50 to-white py-16 md:py-24 flex-grow">
         <div className="container mx-auto px-4">
-          <h1 className="text-4xl font-bold mb-8 text-center">Entre em Contato</h1>
+          <div className="max-w-5xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Entre em Contato</h1>
+            <p className="text-lg text-gray-600 mb-12">
+              Estamos aqui para ajudar. Preencha o formulário abaixo ou use um de nossos canais de contato.
+            </p>
 
-          <div className="max-w-2xl mx-auto">
-            <form className="space-y-6" onSubmit={handleSubmit}>
-              <div>
-                <label htmlFor="nome" className="block mb-2 font-medium">
-                  Nome
-                </label>
-                <Input
-                    type="text"
-                    id="nome"
-                    name="nome"
-                    placeholder="Seu nome completo"
-                    required
-                    value={formData.nome}
-                    onChange={handleChange}
-                />
+            <div className="grid md:grid-cols-3 gap-8 mb-12">
+              <div className="bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-center">
+                <div className="bg-emerald-100 p-4 rounded-full mb-4">
+                  <Phone className="h-6 w-6 text-emerald-600" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-800 mb-2">Telefone</h3>
+                <p className="text-gray-600">(11) 9999-9999</p>
+                <p className="text-gray-600">Segunda a Sexta, 9h às 18h</p>
               </div>
 
-              <div>
-                <label htmlFor="email" className="block mb-2 font-medium">
-                  E-mail
-                </label>
-                <Input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="seu@email.com"
-                    required
-                    value={formData.email}
-                    onChange={handleChange}
-                />
+              <div className="bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-center">
+                <div className="bg-emerald-100 p-4 rounded-full mb-4">
+                  <Mail className="h-6 w-6 text-emerald-600" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-800 mb-2">Email</h3>
+                <p className="text-gray-600">contato@arrematei.com.br</p>
+                <p className="text-gray-600">Respondemos em até 24 horas</p>
               </div>
 
-              <div>
-                <label htmlFor="empresa" className="block mb-2 font-medium">
-                  Empresa
-                </label>
-                <Input
-                    type="text"
-                    id="empresa"
-                    name="empresa"
-                    placeholder="Nome da sua empresa"
-                    value={formData.empresa}
-                    onChange={handleChange}
-                />
+              <div className="bg-white rounded-xl shadow-md p-6 flex flex-col items-center text-center">
+                <div className="bg-emerald-100 p-4 rounded-full mb-4">
+                  <MapPin className="h-6 w-6 text-emerald-600" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-800 mb-2">Endereço</h3>
+                <p className="text-gray-600">Av. Paulista, 1000</p>
+                <p className="text-gray-600">São Paulo - SP</p>
               </div>
+            </div>
 
-              <div>
-                <label htmlFor="assunto" className="block mb-2 font-medium">
-                  Assunto
-                </label>
-                <Input
-                    type="text"
-                    id="assunto"
-                    name="assunto"
-                    placeholder="Assunto da mensagem"
-                    required
-                    value={formData.assunto}
-                    onChange={handleChange}
-                />
-              </div>
+            <div className="bg-white rounded-xl shadow-md p-8">
+              <h2 className="text-2xl font-bold text-gray-800 mb-6">Envie uma Mensagem</h2>
 
-              <div>
-                <label htmlFor="mensagem" className="block mb-2 font-medium">
-                  Mensagem
-                </label>
-                <Textarea
+              {submitSuccess && (
+                <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded mb-6">
+                  Mensagem enviada com sucesso! Entraremos em contato em breve.
+                </div>
+              )}
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label htmlFor="nome" className="text-sm font-medium text-gray-700">
+                      Nome Completo
+                    </label>
+                    <Input type="text" id="nome" name="nome" value={formState.nome} onChange={handleChange} required />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label htmlFor="email" className="text-sm font-medium text-gray-700">
+                      Email
+                    </label>
+                    <Input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formState.email}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label htmlFor="assunto" className="text-sm font-medium text-gray-700">
+                    Assunto
+                  </label>
+                  <Select onValueChange={handleSelectChange} value={formState.assunto}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Selecione um assunto" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Dúvidas">Dúvidas</SelectItem>
+                      <SelectItem value="Suporte">Suporte</SelectItem>
+                      <SelectItem value="Parcerias">Parcerias</SelectItem>
+                      <SelectItem value="Outros">Outros</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="space-y-2">
+                  <label htmlFor="mensagem" className="text-sm font-medium text-gray-700">
+                    Mensagem
+                  </label>
+                  <Textarea
                     id="mensagem"
                     name="mensagem"
-                    placeholder="Digite sua mensagem aqui"
-                    rows={5}
-                    required
-                    value={formData.mensagem}
+                    value={formState.mensagem}
                     onChange={handleChange}
-                />
-              </div>
+                    required
+                    rows={5}
+                  />
+                </div>
 
-              <Button type="submit" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? "Enviando..." : "Enviar Mensagem"}
-              </Button>
-            </form>
-          </div>
-
-          <div className="mt-12 text-center">
-            <h2 className="text-2xl font-semibold mb-4">Outras Formas de Contato</h2>
-            <p className="mb-2">E-mail: contato@michaelbullet.com</p>
-            <p className="mb-2">Telefone: +55 (75) 8336-0359</p>
-            <p>Endereço: Centro, Feira de Santana - BA, 44051-000</p>
+                <Button type="submit" disabled={isSubmitting} className="w-full">
+                  {isSubmitting ? "Enviando..." : "Enviar Mensagem"}
+                </Button>
+              </form>
+            </div>
           </div>
         </div>
-
-        <AlertDialog open={showConfirmation} onOpenChange={setShowConfirmation}>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Mensagem Enviada</AlertDialogTitle>
-              <AlertDialogDescription>Obrigado por entrar em contato. Retornaremos em breve!</AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogAction onClick={() => setShowConfirmation(false)}>OK</AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
       </div>
+
+      <Footer />
+    </main>
   )
 }
 
