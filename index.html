@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central de Suporte - Arrematei</title>
+    <style>
+        :root {
+            --primary-color: #10b981;
+            --primary-dark: #065f46;
+            --bg-light: #f0fdf4;
+            --text-color: #333;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            background-color: #f9fafb;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+        }
+        nav {
+            background-color: var(--bg-light);
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+        }
+        nav ul li {
+            margin: 0 10px;
+        }
+        nav ul li a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        h1, h2, h3 {
+            color: var(--primary-dark);
+        }
+        .search-container {
+            margin: 2rem 0;
+            text-align: center;
+        }
+        .search-container input {
+            width: 60%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .search-container button {
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+        .category {
+            flex-basis: calc(33.333% - 20px);
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .category:hover {
+            transform: translateY(-5px);
+        }
+        .faq {
+            margin-bottom: 2rem;
+        }
+        .faq-item {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 1rem;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .cta-button:hover {
+            background-color: var(--primary-dark);
+        }
+        footer {
+            background-color: var(--primary-dark);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+        @media (max-width: 768px) {
+            .category {
+                flex-basis: 100%;
+            }
+            .search-container input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Central de Suporte Arrematei</h1>
+        </div>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#contato">Contato</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Central de Suporte</h1>
+        <p>Encontre respostas para suas dúvidas e obtenha ajuda para utilizar nossa plataforma de licitações.</p>
+        
+        <div class="search-container">
+            <input type="text" placeholder="Buscar ajuda...">
+            <button>Buscar</button>
+        </div>
+
+        <div class="categories">
+            <div class="category">
+                <h3>Perguntas Frequentes</h3>
+                <p>Respostas rápidas para dúvidas comuns</p>
+            </div>
+            <div class="category">
+                <h3>Tutoriais</h3>
+                <p>Guias passo a passo para usar nossa plataforma</p>
+            </div>
+            <div class="category">
+                <h3>Configurações da Conta</h3>
+                <p>Ajuda com seu perfil e preferências</p>
+            </div>
+            <div class="category">
+                <h3>Participação em Licitações</h3>
+                <p>Como participar e vencer licitações</p>
+            </div>
+            <div class="category">
+                <h3>Contato</h3>
+                <p>Entre em contato com nossa equipe de suporte</p>
+            </div>
+        </div>
+
+        <div class="faq">
+            <h2>Perguntas Frequentes</h2>
+            <div class="faq-item">
+                <h3>Como faço para me cadastrar na plataforma?</h3>
+                <p>Para se cadastrar, clique no botão 'Criar Conta' no canto superior direito da página inicial. Preencha o formulário com suas informações e siga as instruções para verificar seu e-mail.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Quais documentos são necessários para participar de licitações?</h3>
+                <p>Os documentos necessários variam de acordo com o tipo de licitação. Geralmente, são exigidos: CNPJ, contrato social, certidões negativas de débitos e documentos específicos mencionados no edital.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Como faço para receber alertas de novas licitações?</h3>
+                <p>Após fazer login, acesse as configurações do seu perfil e ative as notificações. Você pode personalizar os tipos de licitações sobre as quais deseja receber alertas.</p>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <p>Não encontrou o que procurava?</p>
+            <a href="#contato" class="cta-button">Entre em Contato</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Arrematei. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
