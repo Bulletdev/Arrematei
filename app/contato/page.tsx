@@ -71,7 +71,7 @@ export default function ContatoPage() {
                   <Phone className="h-6 w-6 text-emerald-600" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">Telefone</h3>
-                <p className="text-gray-600">(11) 9999-9999</p>
+                <p className="text-gray-600">(75) 9999-9999</p>
                 <p className="text-gray-600">Segunda a Sexta, 9h às 18h</p>
               </div>
 
